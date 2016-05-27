@@ -12,8 +12,8 @@ way.
 
 To build the environment, just type `./build`.
 
-To execute the environment, type `./run`. You will find yourself in a user
-environment that looks very like CentOS 7, with the following tools available:
+To execute the environment, type `./run`. You will find yourself in an
+environment based on the CentOS 7 userspace, with the following tools available:
 
 * maven (3.0.5)
 * Subversion
