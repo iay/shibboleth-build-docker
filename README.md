@@ -13,7 +13,7 @@ way.
 To build the environment, just type `./build`.
 
 To execute the environment, type `./run`. You will find yourself in an
-environment based on the CentOS 7 userspace, with the following tools available:
+environment based on the [CentOS][] 7 userspace, with the following tools available:
 
 * maven (3.0.5)
 * Subversion
@@ -34,6 +34,7 @@ If you have a Maven `settings.xml` file, you can copy it from
 `~/.m2/settings.xml` into `user/.m2` so that it
 takes effect within the container.
 
+[CentOS]: https://www.centos.org
 [Docker]: https://www.docker.com
 [Docker for Mac]: https://blog.docker.com/2016/03/docker-for-mac-windows-beta/
 [Docker Toolbox]: https://www.docker.com/products/docker-toolbox
