@@ -13,7 +13,7 @@ MAINTAINER Ian Young <ian@iay.org.uk>
 # project defines as the requirement for the stack. In addition, Cobertura
 # doesn't work properly under Java 8.
 #
-RUN yum -y install java-7-openjdk maven git subversion wget && \
+RUN yum -y install git java-7-openjdk maven rpm-build subversion wget && \
     yum clean all
 
 #

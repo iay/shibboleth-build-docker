@@ -18,6 +18,8 @@ The image is based on the [CentOS][] 7 userspace, with the following tools avail
 * Subversion
 * Git
 * OpenJDK version 7
+* rpmbuild
+* wget
 
 Java 7 is used here so that our build environment is based on the same version
 as is specified by `parent-project-v3`. This is also important for the Cobertura
