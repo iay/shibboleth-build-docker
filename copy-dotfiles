@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#
+# Copy some relevant "dotfiles" from the outer environment into the inner one.
+#
+mkdir -p user/.m2
+
+if [ -e ~/.m2/settings.xml ]; then
+  cp -f ~/.m2/settings.xml user/.m2/
+fi
+
+if [ -e ~/.gitconfig ]; then
+  cp -f ~/.gitconfig user/
+fi
