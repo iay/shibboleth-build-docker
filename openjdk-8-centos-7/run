@@ -2,4 +2,4 @@
 
 docker run -i -t --rm --name shibboleth-build \
     --volume=${PWD}/user:/home/user \
-    shibboleth-build-docker:o8-c7
+    shibboleth-build-docker:ojdk8-c7

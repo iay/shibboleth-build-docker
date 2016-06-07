@@ -33,7 +33,7 @@ To build the Docker image for this environment, do this:
 
     (cd openjdk-7-centos-7; ./build)
 
-The image will be tagged as `shibboleth-build-docker:o7-c7`.
+The image will be tagged as `shibboleth-build-docker:ojdk7-c7`.
 
 To execute the environment, type `./run`. This will give you a `bash` prompt
 running under the home directory of user `user` within a container. This home
@@ -53,7 +53,7 @@ to copy them into the user directory. At the moment this handles:
 ## openjdk-8-centos-7
 
 The `openjdk-8-centos-7` directory builds an image which will be tagged
-as `shibboleth-build-docker:o8-c7`. This is the same as the `o7-c7` tag
+as `shibboleth-build-docker:ojdk8-c7`. This is the same as the `ojdk7-c7` tag
 except that OpenJDK 8 is provided instead of OpenJDK 7.
 
 To build the Docker image for this environment, do this:
