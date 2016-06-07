@@ -1,12 +1,12 @@
 # shibboleth-build-docker
 
-A collection of [Docker][] environments for building [Shibboleth][] products
-based on Shibboleth
+A collection of [Docker][] environments for building and testing
+[Shibboleth][] products based on Shibboleth
 [`parent-project-v3`](http://git.shibboleth.net/view/?p=java-parent-project-v3.git).
 
 I'm using this in a [Docker for Mac][] setup, but [Docker Toolbox][] would
 be a close equivalent. The idea here is to embed a stable environment for
-building software within a normal desktop environment, using Docker's
+building or testing software within a normal desktop environment, using Docker's
 container system. You could probably use Docker on a Linux system in the same
 way.
 
@@ -49,6 +49,25 @@ to copy them into the user directory. At the moment this handles:
 
 * `~/.m2/settings.xml`
 * `~/.gitconfig`
+
+## openjdk-8-centos-7
+
+The `openjdk-8-centos-7` directory builds an image which will be tagged
+as `shibboleth-build-docker:o8-c7`. This is the same as the `o7-c7` tag
+except that OpenJDK 8 is provided instead of OpenJDK 7.
+
+To build the Docker image for this environment, do this:
+
+    (cd openjdk-8-centos-7; ./build)
+
+Run the environment using `openjdk-8-centos-7/run`.
+
+This image is best used for testing under OpenJDK 8. It should not be used for
+either product builds or site builds.
+
+One large issue with the OpenJDK 8 environment is that the Cobertura coverage
+tool does not work there.
+
 
 [CentOS]: https://www.centos.org
 [Docker]: https://www.docker.com
