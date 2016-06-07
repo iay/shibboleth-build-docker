@@ -68,6 +68,21 @@ either product builds or site builds.
 One large issue with the OpenJDK 8 environment is that the Cobertura coverage
 tool does not work there.
 
+## openjdk-\*-debian
+
+These three directories build images from the official Docker library `java`
+images, which are based on OpenJDK and Debian. These can be worth testing against
+because OpenJDK in the Debian environment ships with an alternative elliptic
+curve cryptographic provider.
+
+To build these images:
+
+    (cd openjdk-7-debian; ./build)
+    (cd openjdk-8-debian; ./build)
+    (cd openjdk-9-debian; ./build)
+
+The tags for these will be `ojdk7-deb`, `ojdk8-deb` and `ojdk9-deb`.
+
 
 [CentOS]: https://www.centos.org
 [Docker]: https://www.docker.com
