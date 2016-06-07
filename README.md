@@ -1,6 +1,6 @@
 # shibboleth-build-docker
 
-A [Docker][] environment for building [Shibboleth][] products
+A collection of [Docker][] environments for building [Shibboleth][] products
 based on Shibboleth
 [`parent-project-v3`](http://git.shibboleth.net/view/?p=java-parent-project-v3.git).
 
@@ -10,20 +10,30 @@ building software within a normal desktop environment, using Docker's
 container system. You could probably use Docker on a Linux system in the same
 way.
 
-To build the Docker image for the environment, just type `./build`.
+## openjdk-7-centos-7
+
+The `openjdk-7-centos-7` directory builds what should be regarded as
+the default environment.
 
 The image is based on the [CentOS][] 7 userspace, with the following tools available:
 
-* maven (3.0.5)
+* maven (3.3.9)
 * Subversion
 * Git
 * OpenJDK version 7
 * rpmbuild
 * wget
+* which
 
 Java 7 is used here so that our build environment is based on the same version
 as is specified by `parent-project-v3`. This is also important for the Cobertura
 coverage tests, as those run into issues with Java 8.
+
+To build the Docker image for this environment, do this:
+
+    (cd openjdk-7-centos-7; ./build)
+
+The image will be tagged as `shibboleth-build-docker:o7-c7`.
 
 To execute the environment, type `./run`. This will give you a `bash` prompt
 running under the home directory of user `user` within a container. This home
