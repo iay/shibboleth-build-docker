@@ -15,7 +15,7 @@ ARG mavenver=3.3.9
 #
 # Pull in Java, and commonly required tools.
 #
-RUN yum -y install git rpm-build subversion wget which \
+RUN yum -y install git rpm-build rpm-sign subversion wget which \
     ${java} ${java}-devel ${java}-headless && \
     yum clean all
 

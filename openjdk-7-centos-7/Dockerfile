@@ -19,7 +19,7 @@ ARG mavenver=3.3.9
 # project defines as the requirement for the stack. In addition, Cobertura
 # doesn't work properly under Java 8.
 #
-RUN yum -y install git rpm-build subversion wget which \
+RUN yum -y install git rpm-build rpm-sign subversion wget which \
     ${java} ${java}-devel ${java}-headless && \
     yum clean all
 
