@@ -49,6 +49,11 @@ to copy them into the user directory. At the moment this handles:
 
 * `~/.m2/settings.xml`
 * `~/.gitconfig`
+* `~/.ssh`
+
+Copying `~/.ssh` is mostly intended to allow the use of `git` to a remote
+repository, but note that you will need to type the passphrase each time as
+no `ssh` agent is set up. This is not intended to be a development environment.
 
 ## openjdk-8-centos-7
 

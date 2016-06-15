@@ -12,3 +12,7 @@ fi
 if [ -e ~/.gitconfig ]; then
   cp -f ~/.gitconfig user/
 fi
+
+if [ -d ~/.ssh ]; then
+  cp -f -r ~/.ssh user/
+fi
