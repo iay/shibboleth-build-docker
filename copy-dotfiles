@@ -16,3 +16,7 @@ fi
 if [ -d ~/.ssh ]; then
   cp -f -r ~/.ssh user/
 fi
+
+if [ -d ~/.gnupg ]; then
+  cp -f -r ~/.gnupg user/
+fi
