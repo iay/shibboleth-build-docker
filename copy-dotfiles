@@ -3,20 +3,53 @@
 #
 # Copy some relevant "dotfiles" from the outer environment into the inner one.
 #
-mkdir -p user/.m2
 
+#
+# Maven configuration.
+#
+# The Maven repository is NOT copied, so the repository inside the
+# container is independent to the one outside.
+#
+mkdir -p user/.m2
 if [ -e ~/.m2/settings.xml ]; then
   cp -f ~/.m2/settings.xml user/.m2/
 fi
 
+#
+# Git configuration.
+#
 if [ -e ~/.gitconfig ]; then
   cp -f ~/.gitconfig user/
 fi
 
+#
+# SSH configuration.
+#
 if [ -d ~/.ssh ]; then
   cp -f -r ~/.ssh user/
 fi
 
+#
+# GPG configuration.
+#
+# Only copy general configuration and old-style keyrings.
+#
+# Don't copy anything else: things like agent sockets and agent configuration
+# need to be different inside the container.
+#
 if [ -d ~/.gnupg ]; then
-  cp -f -r ~/.gnupg user/
+  mkdir -p user/.gnupg
+  if [ -f ~/.gnupg/gpg.conf ]; then
+    cp -f ~/.gnupg/gpg.conf user/.gnupg/
+  fi
+  if [ -f ~/.gnupg/secring.gpg ]; then
+    cp -f ~/.gnupg/secring.gpg user/.gnupg/
+  fi
+  if [ -f ~/.gnupg/pubring.gpg ]; then
+    cp -f ~/.gnupg/pubring.gpg user/.gnupg/
+  fi
 fi
+
+#
+# End.
+#
