@@ -23,6 +23,8 @@ RUN yum -y install git rpm-build rpm-sign subversion wget which \
     ${java} ${java}-devel ${java}-headless && \
     yum clean all
 
+ADD gpg-agent.conf /etc/gnupg/
+
 #
 # Install latest version of Maven.
 #
