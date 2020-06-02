@@ -1,4 +1,5 @@
 user/
+user-*/
 README.md
 Dockerfile
 build
