@@ -150,9 +150,8 @@ To build these images:
 
     (cd openjdk-7-debian; ./build)
     (cd openjdk-8-debian; ./build)
-    (cd openjdk-9-debian; ./build)
 
-The tags for these will be `ojdk7-deb`, `ojdk8-deb` and `ojdk9-deb`.
+The tags for these will be `ojdk7-deb` and `ojdk8-deb`.
 
 ## Troubleshooting
 
