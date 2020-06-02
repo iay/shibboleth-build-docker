@@ -14,6 +14,11 @@ RUN yum -y install git rpm-build rpm-sign wget which && \
     yum clean all
 
 #
+# Default GPG agent configuration.
+#
+ADD gpg-agent.conf /etc/gnupg/
+
+#
 # Install latest version of Maven.
 #
 WORKDIR /opt
