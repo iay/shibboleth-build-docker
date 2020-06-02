@@ -34,7 +34,8 @@ with some useful files from your host environment:
 
 * Selected files from your GPG configuration in `~/.gnupg` are copied primarily
   so that you can sign `git tag` operations and Maven artifacts:
-  * `secring.gpg` and `pubring.gpg` are copied if you have them.
+  * `secring.gpg` and `pubring.gpg` are copied if you have them. If you don't,
+    see [GPG Keyring Format](#gpg-keyring-format) below.
   * `gpg.conf` for your main configuration.
   * Other files are _not_ copied, as things like agent configurations and
     agent sockets need to be different inside the container.
@@ -207,7 +208,8 @@ $ gpg --import secret.asc
 
 ### GPG Agent
 
-If the location _on the host_ is too far from the root, you may run into issues
+If the location of this repository _on the host_ is too far from the root (if
+the length of the repository's path is too long), you may run into issues
 starting a `gpg-agent` process:
 
 ```
@@ -225,6 +227,11 @@ If you run into this issue, the solution seems to be to move the
 `shibboleth-build-docker` repository itself closer to the root _on the host_ and
 try again.
 
+It's not clear exactly how long a path becomes a problem, but we have a couple
+of data points.
+
+* A value of `pwd | wc -c` of 50 or below seems to be acceptable.
+* A value of `pwd | wc -c` of 90 or above seems to be problematic.
 
 [CentOS]: https://www.centos.org
 [Docker]: https://www.docker.com
