@@ -39,6 +39,7 @@ fi
 #
 if [ -d ~/.gnupg ]; then
   mkdir -p user/.gnupg
+  chmod 700 user/.gnupg
   if [ -f ~/.gnupg/gpg.conf ]; then
     cp -f ~/.gnupg/gpg.conf user/.gnupg/
   fi
