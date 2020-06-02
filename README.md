@@ -74,9 +74,31 @@ Ctrl+D.
 If you want to start fresh, just exit the environment and then remove the
 `user/` directory. It will be recreated on the next run.
 
+## openjdk-site
+
+This directory builds an environment which addresses a specific issue in the
+Shibboleth Project build system for the Java 11 platform, which is that some
+site builds don't work under Java 11 distributions. Later versions of Java
+have a fix for this issue, so until that fix is back-ported to Java 11, this
+image can be used to work around it.
+
+The image is currently based on the standard `openjdk:14` from Docker Hub. That
+image is in turn based on Oracle Linux, an `rpm`-based Linux distribution
+derived from RHEL 7 sources. When OpenJDK 14 is retired, we would expect this
+to move to the latest current released OpenJDK version, hence the lack of a
+Java version in the container name.
+
+To build the Docker image for this environment, do this:
+
+    (cd openjdk-site; ./build)
+
+The image will be tagged as `shibboleth-build-docker:site`.
+
+To execute the environment, type `openjdk-site/run`
+
 ## openjdk-7-centos-7
 
-The `openjdk-7-centos-7` directory builds and environment intended to allow
+The `openjdk-7-centos-7` directory builds an environment intended to allow
 formal production builds of products based on the Shibboleth Project's Java 7
 platform.
 
