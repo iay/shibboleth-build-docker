@@ -34,6 +34,6 @@ USER user
 WORKDIR ${userdir}
 
 #
-# By default, run a shell.
+# By default, run a login shell.
 #
-CMD ["/bin/bash"]
+CMD ["/bin/bash", "--login"]
