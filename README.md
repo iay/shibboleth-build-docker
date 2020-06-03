@@ -95,7 +95,11 @@ To build the Docker image for this environment, do this:
 
 The image will be tagged as `shibboleth-build-docker:site`.
 
-To execute the environment, type `openjdk-site/run`
+To execute the environment, type `openjdk-site/run`.
+
+For large projects, you may find that building the site takes a very long time
+inside a container. Refer to the [Performance](#performance) section below for
+an explanation and some tuning suggestions.
 
 ## openjdk-7-centos-7
 
@@ -232,6 +236,34 @@ of data points.
 
 * A value of `pwd | wc -c` of 50 or below seems to be acceptable.
 * A value of `pwd | wc -c` of 90 or above seems to be problematic.
+
+### Performance
+
+If you are running these containers under Docker on a Linux system, you should
+find that operations inside a container perform essentially indistinguishably to
+running them on the host.
+
+On the other hand, if you are running these containers using a technology such
+as [Docker Desktop for Mac][], some operations will be significantly slower
+because the containers are really running not on your host machine but on a
+Linux virtual machine that is in turn running on your host machine. For
+CPU-bound operations, the difference will likely not be noticeable in practice.
+
+Operations that perform heavy I/O to the host filesystem (the `/home/user`
+directory) may, however, be significantly slower because the host file system is
+essentially remote to the container VM. We have found that the
+`maven-javadoc-plugin` is particularly affected by this.
+
+There are ways to [tune the performance of volume
+mounts](https://docs.docker.com/docker-for-mac/osxfs-caching/) which we haven't
+investigated yet. One fairly simple short-term solution should this problem
+arise is to move the data from `/home/user` to the container's `/tmp` directory
+temporarily. Because `/tmp` is local to the container, it exists within the
+container VM rather than on the host file system and performance is much higher.
+Of course one downside of this approach is that the `/tmp` directory does not
+persist if you exit the shell and thus terminate the container; you should
+ensure that the results of your operation are preserved either in `/home/user`
+or otherwise before exiting.
 
 [CentOS]: https://www.centos.org
 [Docker]: https://www.docker.com
