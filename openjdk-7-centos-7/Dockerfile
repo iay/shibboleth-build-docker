@@ -10,7 +10,7 @@ MAINTAINER Ian Young <ian@iay.org.uk>
 # Build arguments and their defaults.
 #
 ARG java=java-1.7.0-openjdk
-ARG mavenver=3.3.9
+ARG mavenver=3.6.3
 
 #
 # Pull in Java, and commonly required tools.
@@ -19,17 +19,25 @@ ARG mavenver=3.3.9
 # project defines as the requirement for the stack. In addition, Cobertura
 # doesn't work properly under Java 8.
 #
-RUN yum -y install git rpm-build rpm-sign subversion wget which \
+RUN yum -y install git rpm-build rpm-sign wget which \
     ${java} ${java}-devel ${java}-headless && \
     yum clean all
 
+#
+# Default GPG agent configuration.
+#
 ADD gpg-agent.conf /etc/gnupg/
+
+#
+# Bash profile.
+#
+ADD profile.d/ /etc/profile.d/
 
 #
 # Install latest version of Maven.
 #
 WORKDIR /opt
-RUN wget --no-verbose http://mirror.catn.com/pub/apache/maven/maven-3/${mavenver}/binaries/apache-maven-${mavenver}-bin.tar.gz && \
+RUN wget --no-verbose https://apache.osuosl.org/maven/maven-3/${mavenver}/binaries/apache-maven-${mavenver}-bin.tar.gz && \
     tar xfz apache-maven-${mavenver}-bin.tar.gz && \
     rm *.tar.gz
 ENV M2_HOME=/opt/apache-maven-${mavenver}
