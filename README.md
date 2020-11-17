@@ -56,6 +56,7 @@ The image includes the following tools:
 * maven (3.6.3)
 * Git
 * rpmbuild
+* sudo
 * wget
 * which
 
@@ -74,6 +75,12 @@ Ctrl+D.
 
 If you want to start fresh, just exit the environment and then remove the
 `user/` directory. It will be recreated on the next run.
+
+If you're running on macOS, and there's an `ssh-agent` running in the host
+session, it will be forwarded into the container so that you can use
+things like `git clone` without further ado. Otherwise, a local `ssh-agent`
+will be started inside the container, to which you can add identities from the
+container's local `.ssh/` directory.
 
 ## openjdk-site
 
