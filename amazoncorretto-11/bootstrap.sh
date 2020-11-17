@@ -13,6 +13,11 @@ if [ -e ${forwarded} ]; then
 fi
 
 #
+# Fix ownership of the interactive terminal as well.
+#
+chown user:user $(tty)
+
+#
 # Become the user, and "log in".
 #
 su - user
