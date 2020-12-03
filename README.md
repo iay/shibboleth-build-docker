@@ -125,9 +125,12 @@ available:
 * wget
 * which
 
-Java 7 is used here so that our build environment is based on the same version
-as is specified by `parent-project-v3`. This is also important for the Cobertura
-coverage tests, as those run into issues with Java 8.
+The OpenJDK provided here is not quite the Java distribution specified as the
+"primary distribution" for the Shibboleth Project's Java 7 platform; that's
+Oracle's distribution.
+
+The intention nevertheless is to allow close to formal
+production builds of any of the products based on that platform.
 
 To build the Docker image for this environment, do this:
 
@@ -135,7 +138,7 @@ To build the Docker image for this environment, do this:
 
 The image will be tagged as `shibboleth-build-docker:ojdk7-c7`.
 
-To execute the environment, type `./run`. This will give you a `bash` prompt
+To execute the environment, type `openjdk-7-centos-7/run`. This will give you a `bash` prompt
 running under the home directory of user `user` within a container. This home
 directory will also exist _outside_ the container as a `user/` directory under
 the build location, and will retain state between runs. Terminate the
@@ -154,6 +157,12 @@ to copy them into the user directory. At the moment this handles:
 Copying `~/.ssh` is mostly intended to allow the use of `git` to a remote
 repository, but note that you will need to type the passphrase each time as
 no `ssh` agent is set up. This is not intended to be a development environment.
+
+If you're running on macOS, and there's an `ssh-agent` running in the host
+session, it will be forwarded into the container so that you can use
+things like `git clone` without further ado. Otherwise, a local `ssh-agent`
+will be started inside the container, to which you can add identities from the
+container's local `.ssh/` directory.
 
 ## openjdk-8-centos-7
 

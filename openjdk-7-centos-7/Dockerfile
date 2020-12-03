@@ -19,7 +19,7 @@ ARG mavenver=3.6.3
 # project defines as the requirement for the stack. In addition, Cobertura
 # doesn't work properly under Java 8.
 #
-RUN yum -y install git rpm-build rpm-sign wget which \
+RUN yum -y install git rpm-build rpm-sign sudo wget which \
     ${java} ${java}-devel ${java}-headless && \
     yum clean all
 
@@ -45,14 +45,18 @@ ENV M2=${M2_HOME}/bin
 ENV PATH=${M2}:${PATH}
 
 #
+# Bootstrap script.
+#
+ADD bootstrap.sh /etc/bootstrap.sh
+
+#
 # Do all our work as a normal user, in a home directory.
 #
 RUN adduser user
-USER user
 ENV userdir=/home/user
 WORKDIR ${userdir}
 
 #
 # By default, run a login shell.
 #
-CMD ["/bin/bash", "--login"]
+CMD ["/bin/bash", "/etc/bootstrap.sh"]
