@@ -90,9 +90,9 @@ site builds don't work under Java 11 distributions. Later versions of Java
 have a fix for this issue, so until that fix is back-ported to Java 11, this
 image can be used to work around it.
 
-The image is currently based on the standard `openjdk:14` from Docker Hub. That
-image is in turn based on Oracle Linux, an `rpm`-based Linux distribution
-derived from RHEL 7 sources. When OpenJDK 14 is retired, we would expect this
+The image is currently based on the standard `openjdk:15` from Docker Hub. That
+image is in turn based on Oracle Linux 8, an `dnf`-based Linux distribution
+derived from RHEL 8 sources. When OpenJDK 15 is retired, we would expect this
 to move to the latest current released OpenJDK version, hence the lack of a
 Java version in the container name.
 

@@ -1,4 +1,4 @@
-FROM openjdk:14
+FROM openjdk:15
 
 MAINTAINER Ian Young <ian@iay.org.uk>
 
@@ -10,8 +10,8 @@ ARG mavenver=3.6.3
 #
 # Pull in commonly required tools.
 #
-RUN yum -y install git rpm-build rpm-sign wget which && \
-    yum clean all
+RUN microdnf install git rpm-build rpm-sign wget which && \
+    microdnf clean all
 
 #
 # Default GPG agent configuration.
