@@ -90,6 +90,19 @@ things like `git clone` without further ado. Otherwise, a local `ssh-agent`
 will be started inside the container, to which you can add identities from the
 container's local `.ssh/` directory.
 
+If you just want to try something quickly in this environment without building
+the image yourself, you can invoke a pre-built container from Docker Hub:
+
+```bash
+$ docker run --rm -it ianayoung/shibboleth-build-docker:amazon11
+...
+openjdk version "11.0.14" 2022-01-18 LTS
+OpenJDK Runtime Environment Corretto-11.0.14.9.1 (build 11.0.14+9-LTS)
+OpenJDK 64-Bit Server VM Corretto-11.0.14.9.1 (build 11.0.14+9-LTS, mixed mode)
+Agent pid 48
+user@C11: ~ $
+```
+
 ## amazoncorretto-17
 
 This is the same as `amazoncorretto-11` but providing Corretto 17 instead of
