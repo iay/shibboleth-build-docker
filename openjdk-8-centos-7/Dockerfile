@@ -10,7 +10,7 @@ MAINTAINER Ian Young <ian@iay.org.uk>
 # Build arguments and their defaults.
 #
 ARG java=java-1.8.0-openjdk
-ARG mavenver=3.6.3
+ARG mavenver=3.8.4
 
 #
 # Pull in Java, and commonly required tools.

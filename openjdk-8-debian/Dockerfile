@@ -5,7 +5,7 @@ MAINTAINER Ian Young <ian@iay.org.uk>
 #
 # Build arguments and their defaults.
 #
-ARG mavenver=3.3.9
+ARG mavenver=3.8.4
 
 #
 # Pull in commonly required tools.
@@ -18,7 +18,7 @@ ARG mavenver=3.3.9
 # Install latest version of Maven.
 #
 WORKDIR /opt
-RUN wget --no-verbose http://mirror.catn.com/pub/apache/maven/maven-3/${mavenver}/binaries/apache-maven-${mavenver}-bin.tar.gz && \
+RUN wget --no-verbose https://apache.osuosl.org/maven/maven-3/${mavenver}/binaries/apache-maven-${mavenver}-bin.tar.gz && \
     tar xfz apache-maven-${mavenver}-bin.tar.gz && \
     rm *.tar.gz
 ENV M2_HOME=/opt/apache-maven-${mavenver}

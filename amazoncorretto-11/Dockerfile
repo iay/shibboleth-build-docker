@@ -5,7 +5,7 @@ MAINTAINER Ian Young <ian@iay.org.uk>
 #
 # Build arguments and their defaults.
 #
-ARG mavenver=3.6.3
+ARG mavenver=3.8.4
 
 #
 # Pull in commonly required tools.
