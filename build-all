@@ -1,0 +1,29 @@
+#!/bin/bash
+
+#
+# Build each variant of the shibboleth-build-docker container image.
+#
+# Any parameters passed to this script will be passed in turn to each
+# variant's build script.
+#
+
+#
+# Fail on any errors.
+#
+set -e
+
+#
+# Variants are located by looking for an executable "build" file in a
+# subdirectory, then stripping it down to the directory name.
+#
+VARIANTS=$(find . -name build -type f -perm +1 | sort | xargs dirname | xargs basename )
+
+#
+# Build each variant in turn.
+#
+for VARIANT in ${VARIANTS}
+do
+  echo Building ${VARIANT}...
+  (cd $VARIANT; ./build $@)
+  echo Built ${VARIANT}.
+done

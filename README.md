@@ -15,6 +15,14 @@ Each directory contains a `build` script to build the container image, and a
 `run` script to start a new container based on that image and providing a shell
 running within it.
 
+You can pass arguments to the `build` script and they will be passed on to the
+`docker build` command. For example, adding `--pull` would mean to build
+against the latest base image rather than whatever is cached locally.
+
+If you want to build _all_ of the variants at once, you can use the `build-all`
+script in the top directory. If you pass arguments to this script they will
+be forwarded to each variant's `build` script in turn.
+
 The `run` script mounts the `user` directory from the repository as `/home/user`
 within the container; from the container's prompt, this appears as the user's
 home directory and persists across sessions. It is also common across sessions
