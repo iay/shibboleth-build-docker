@@ -90,6 +90,12 @@ things like `git clone` without further ado. Otherwise, a local `ssh-agent`
 will be started inside the container, to which you can add identities from the
 container's local `.ssh/` directory.
 
+## amazoncorretto-17
+
+This is the same as `amazoncorretto-11` but providing Corretto 17 instead of
+Corretto 11. The expectation is that the next generation of Shibboleth Java
+products will be built on this platform.
+
 ## openjdk-site
 
 This directory builds an environment which addresses a specific issue in the
