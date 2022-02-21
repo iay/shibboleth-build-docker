@@ -109,27 +109,8 @@ This is the same as `amazoncorretto-11` but providing Corretto 17 instead of
 Corretto 11. The expectation is that the next generation of Shibboleth Java
 products will be built on this platform.
 
-## openjdk-site
-
-This directory builds an environment which addresses a specific issue in the
-Shibboleth Project build system for the Java 11 platform, which is that some
-site builds don't work under Java 11 distributions. Later versions of Java
-have a fix for this issue, so until that fix is back-ported to Java 11, this
-image can be used to work around it.
-
-The image is currently based on the standard `openjdk:15` from Docker Hub. That
-image is in turn based on Oracle Linux 8, an `dnf`-based Linux distribution
-derived from RHEL 8 sources. When OpenJDK 15 is retired, we would expect this
-to move to the latest current released OpenJDK version, hence the lack of a
-Java version in the container name.
-
-To build the Docker image for this environment, do this:
-
-    (cd openjdk-site; ./build)
-
-The image will be tagged as `shibboleth-build-docker:site`.
-
-To execute the environment, type `openjdk-site/run`.
+It is also used to perform Maven "site" builds for some projects for the Java
+11 platform. The builds don't currently work under Java 11 distributions.
 
 For large projects, you may find that building the site takes a very long time
 inside a container. Refer to the [Performance](#performance) section below for
