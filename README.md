@@ -28,7 +28,18 @@ within the container; from the container's prompt, this appears as the user's
 home directory and persists across sessions. It is also common across sessions
 using _different_ container variants.
 
-Running the `./copy-dotfiles` script will populate this shared home directory
+You can pass arguments to the `run` script and they will be passed on to the
+`docker run` command as Docker options. For example:
+
+```bash
+$ ./run --network none
+...
+user@C11: ~ $ curl -I https://iay.org.uk
+curl: (6) Could not resolve host: iay.org.uk
+user@C11: ~ $
+```
+
+Running the `./copy-dotfiles` script will populate the shared home directory
 with some useful files from your host environment:
 
 * The Maven configuration from your `~/.m2/settings.xml` file. Other files

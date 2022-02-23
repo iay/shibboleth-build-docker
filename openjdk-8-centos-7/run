@@ -13,4 +13,5 @@ fi
 docker run -i -t --rm --name shibboleth-build \
     --volume=${PWD}/user:/home/user \
     $MAC_OPTIONS \
+    $@ \
     shibboleth-build-docker:ojdk8-c7

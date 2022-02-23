@@ -2,4 +2,5 @@
 
 docker run -i -t --rm --name shibboleth-build \
     --volume=${PWD}/user:/home/user \
+    $@ \
     shibboleth-build-docker:ojdk7-deb
