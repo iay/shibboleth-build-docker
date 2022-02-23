@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Tag for the image variant we are using
+TAG=amazon11
+
 #
 # Docker Desktop for Mac: Mount the magic volume to forward the ssh-agent.
 #
@@ -10,8 +13,8 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
     fi
 fi
 
-docker run -i -t --rm --name shibboleth-build \
+docker run -i -t --rm --name shibboleth-build --hostname ${TAG} \
     --volume=${PWD}/user:/home/user \
     $MAC_OPTIONS \
     $@ \
-    shibboleth-build-docker:amazon11
+    shibboleth-build-docker:${TAG}

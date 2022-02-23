@@ -1,6 +1,9 @@
 #!/bin/bash
 
-docker run -i -t --rm --name shibboleth-build \
+# Tag for the image variant we are using
+TAG=ojdk11-c7
+
+docker run -i -t --rm --name shibboleth-build --hostname ${TAG} \
     --volume=${PWD}/user:/home/user \
     $@ \
-    shibboleth-build-docker:ojdk11-c7
+    shibboleth-build-docker:${TAG}
