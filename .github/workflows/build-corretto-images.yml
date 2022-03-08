@@ -1,0 +1,61 @@
+#
+# Corretto 11 and 17 image build workflow.
+#
+# Every time something is pushed to the "main" branch,
+# build multi-architecture container images based on
+# Amazon Corretto 11 and 17. Push these image to Docker Hub.
+#
+name: Build Corretto Images
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+
+  build-corretto-images:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1
+      with:
+        platforms: arm64
+
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Inspect builder
+      run: |
+        echo "Name:      ${{ steps.buildx.outputs.name }}"
+        echo "Endpoint:  ${{ steps.buildx.outputs.endpoint }}"
+        echo "Status:    ${{ steps.buildx.outputs.status }}"
+        echo "Flags:     ${{ steps.buildx.outputs.flags }}"
+        echo "Platforms: ${{ steps.buildx.outputs.platforms }}"
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_TOKEN }}
+
+    - name: Build and push Corretto 11 multi-architecture image
+      run: |
+        docker buildx build --platform=linux/amd64,linux/arm64 \
+          --push \
+          --tag ${{ secrets.DOCKER_USERNAME }}/shibboleth-build-docker:amazon11 \
+          amazoncorretto-11
+
+    - name: Build and push Corretto 17 multi-architecture image
+      run: |
+        docker buildx build --platform=linux/amd64,linux/arm64 \
+          --push \
+          --tag ${{ secrets.DOCKER_USERNAME }}/shibboleth-build-docker:amazon17 \
+          amazoncorretto-17
