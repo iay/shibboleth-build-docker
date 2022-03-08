@@ -1,14 +1,95 @@
 # shibboleth-build-docker
 
-A collection of [Docker][] environments for building and testing
-[Shibboleth][] products.
+A collection of stable environments for use in building and testing
+[Shibboleth][] products. Each environment is represented by a
+container image so that it can be embedded within a normal desktop
+environment using [Docker][].
 
-I'm using this with [Docker Desktop for Mac][], but any Docker setup should
-work, including "real" Docker running on a Linux system.
+## Pre-built Environments
 
-The idea here is to embed a stable environment for
-building or testing software within a normal desktop environment, using Docker's
-container system.
+If your use case is the building of Shibboleth products or their Maven sites,
+you can use one of the pre-built environments based on Amazon Corretto 11
+(for Java 11 platform products) or Amazon Corretto 17 (for the Maven
+sites of Java 11 platform products, or for Java 17 platform products).
+
+These are multi-architecture images supporting both both `linux/amd64`
+and `linux/arm64` hosts;the latter is used on Apple Silicon
+based Macs.
+
+To use these images, you make use of the various `runx` scripts included in this
+repository; the corresponding pre-built environment for your host architecture
+will be downloaded from Docker Hub.
+
+Each of the `runx` scripts will start a new container based on the appropriate
+image and provide a shell running within it. The `user` directory _in the
+directory in which you invoke `runx`_ will be created if necessary and then
+mounted into the container as the user's home directory. This will persist
+across sessions.
+
+It is normal to invoke the `runx` scripts from the root directory of this
+repository; this means that the home directory will persist even across
+sessions using _different_ container variants.
+
+`runx` scripts exist in the `amazoncorretto-11` and `amazoncorretto-17`
+directories and can be invoked as such:
+
+```bash
+$ amazoncorretto-11/runx
+```
+
+In addition, a `runx` alias is provided in the root directory for the most
+common case of invoking the Corretto 11 environment.
+
+You can pass arguments to a `runx` script and they will be passed on to the
+`docker run` command as Docker options. For example, to run the container
+without network access:
+
+```bash
+$ ./runx --network none
+...
+user@C11: ~ $ curl -I https://iay.org.uk
+curl: (6) Could not resolve host: iay.org.uk
+user@C11: ~ $
+```
+
+To pull the most up-to-date version of the container image before execution:
+
+```bash
+$ ./runx --pull always
+amazon11: Pulling from ianayoung/shibboleth-build-docker
+...
+Status: Downloaded newer image for ianayoung/shibboleth-build-docker:amazon11
+...
+user@C11: ~ $
+```
+
+Running the `./copy-dotfiles` script will populate the shared home directory
+with some useful files from your host environment:
+
+* The Maven configuration from your `~/.m2/settings.xml` file. Other files
+  (such as the `~/.m2/repository` directory) are not copied: the Maven
+  repository inside the container is isolated from the repository on the host.
+
+* Your `~/.gitconfig` file, if there is one.
+
+* Your `~/.ssh/` directory, primarily so that you can `git clone` things from
+  non-public repositories.
+
+* Selected files from your GPG configuration in `~/.gnupg` are copied primarily
+  so that you can sign `git tag` operations and Maven artifacts:
+  * `secring.gpg` and `pubring.gpg` are copied if you have them. If you don't,
+    see [GPG Keyring Format](#gpg-keyring-format) below.
+  * `gpg.conf` for your main configuration.
+  * Other files are _not_ copied, as things like agent configurations and
+    agent sockets need to be different inside the container.
+
+
+## Build Your Own Environments
+
+If you are unable to use the pre-built environments for whatever reason,
+you will need to perform a local build of the container image or images
+you want to use. Note that images built in this way will be specific to
+your Docker host's architecture.
 
 Each directory in the repository represents a different build environment.
 Each directory contains a `build` script to build the container image, and a
@@ -101,19 +182,6 @@ things like `git clone` without further ado. Otherwise, a local `ssh-agent`
 will be started inside the container, to which you can add identities from the
 container's local `.ssh/` directory.
 
-If you just want to try something quickly in this environment without building
-the image yourself, you can invoke a pre-built container from Docker Hub:
-
-```bash
-$ docker run --rm -it ianayoung/shibboleth-build-docker:amazon11
-...
-openjdk version "11.0.14" 2022-01-18 LTS
-OpenJDK Runtime Environment Corretto-11.0.14.9.1 (build 11.0.14+9-LTS)
-OpenJDK 64-Bit Server VM Corretto-11.0.14.9.1 (build 11.0.14+9-LTS, mixed mode)
-Agent pid 48
-user@C11: ~ $
-```
-
 ## amazoncorretto-17
 
 This is the same as `amazoncorretto-11` but providing Corretto 17 instead of
@@ -121,7 +189,7 @@ Corretto 11. The expectation is that the next generation of Shibboleth Java
 products will be built on this platform.
 
 It is also used to perform Maven "site" builds for some projects for the Java
-11 platform. The builds don't currently work under Java 11 distributions.
+11 platform. These builds don't currently work under Java 11 distributions.
 
 For large projects, you may find that building the site takes a very long time
 inside a container. Refer to the [Performance](#performance) section below for
