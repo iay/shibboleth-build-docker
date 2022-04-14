@@ -23,7 +23,7 @@ RUN yum -y install git rpm-build rpm-sign wget which \
 # Install latest version of Maven.
 #
 WORKDIR /opt
-RUN wget --no-verbose  https://apache.osuosl.org/maven/maven-3/${mavenver}/binaries/apache-maven-${mavenver}-bin.tar.gz && \
+RUN wget --no-verbose  https://archive.apache.org/dist/maven/maven-3/${mavenver}/binaries/apache-maven-${mavenver}-bin.tar.gz && \
     tar xfz apache-maven-${mavenver}-bin.tar.gz && \
     rm *.tar.gz
 ENV M2_HOME=/opt/apache-maven-${mavenver}
