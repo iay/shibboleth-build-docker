@@ -1,6 +1,6 @@
 FROM amazoncorretto:11
 
-MAINTAINER Ian Young <ian@iay.org.uk>
+LABEL maintainer="Ian Young <ian@iay.org.uk>"
 
 #
 # Build arguments and their defaults.
