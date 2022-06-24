@@ -12,6 +12,9 @@ you can use one of the pre-built environments based on Amazon Corretto 11
 (for Java 11 platform products) or Amazon Corretto 17 (for the Maven
 sites of Java 11 platform products, or for Java 17 platform products).
 
+I also provide a pre-built environment based on Amazon Corretto 8, although
+this version is no longer used in Shibboleth builds.
+
 These are multi-architecture images supporting both both `linux/amd64`
 and `linux/arm64` hosts;the latter is used on Apple Silicon
 based Macs.
@@ -30,7 +33,7 @@ It is normal to invoke the `runx` scripts from the root directory of this
 repository; this means that the home directory will persist even across
 sessions using _different_ container variants.
 
-`runx` scripts exist in the `amazoncorretto-11` and `amazoncorretto-17`
+`runx` scripts exist in the `amazoncorretto-8`, `amazoncorretto-11` and `amazoncorretto-17`
 directories and can be invoked as such:
 
 ```bash
