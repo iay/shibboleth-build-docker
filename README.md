@@ -37,7 +37,7 @@ sessions using _different_ container variants.
 directories and can be invoked as such:
 
 ```bash
-$ amazoncorretto-11/runx
+amazoncorretto-11/runx
 ```
 
 In addition, a `runx` alias is provided in the root directory for the most
@@ -85,7 +85,6 @@ with some useful files from your host environment:
   * `gpg.conf` for your main configuration.
   * Other files are _not_ copied, as things like agent configurations and
     agent sockets need to be different inside the container.
-
 
 ## Build Your Own Environments
 
@@ -165,7 +164,9 @@ The image includes the following tools:
 
 To build the Docker image for this environment, do this:
 
-    (cd amazoncorretto-11; ./build)
+```bash
+(cd amazoncorretto-11; ./build)
+```
 
 The image will be tagged as `shibboleth-build-docker:amazon11`.
 
@@ -224,7 +225,9 @@ production builds of any of the products based on that platform.
 
 To build the Docker image for this environment, do this:
 
-    (cd openjdk-7-centos-7; ./build)
+```bash
+(cd openjdk-7-centos-7; ./build)
+```
 
 The image will be tagged as `shibboleth-build-docker:ojdk7-c7`.
 
@@ -262,7 +265,9 @@ except that OpenJDK 8 is provided instead of OpenJDK 7.
 
 To build the Docker image for this environment, do this:
 
-    (cd openjdk-8-centos-7; ./build)
+```bash
+(cd openjdk-8-centos-7; ./build)
+```
 
 Run the environment using `openjdk-8-centos-7/run`.
 
@@ -281,8 +286,10 @@ curve cryptographic provider.
 
 To build these images:
 
-    (cd openjdk-7-debian; ./build)
-    (cd openjdk-8-debian; ./build)
+```bash
+(cd openjdk-7-debian; ./build)
+(cd openjdk-8-debian; ./build)
+```
 
 The tags for these will be `ojdk7-deb` and `ojdk8-deb`.
 
@@ -307,13 +314,13 @@ inside the containers until you import your secret keys. To so this, perform the
 following _outside_ the container:
 
 ```bash
-$ gpg -a --export-secret-keys --output user/secret.asc
+gpg -a --export-secret-keys --output user/secret.asc
 ```
 
 Now, perform the following _inside_ the container:
 
 ```bash
-$ gpg --import secret.asc
+gpg --import secret.asc
 ```
 
 ### GPG Agent
@@ -322,7 +329,7 @@ If the location of this repository _on the host_ is too far from the root (if
 the length of the repository's path is too long), you may run into issues
 starting a `gpg-agent` process:
 
-```
+```text
 gpg: can't connect to the agent: IPC connect call failed
 ```
 
