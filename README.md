@@ -16,7 +16,7 @@ I also provide a pre-built environment based on Amazon Corretto 8, although
 this version is no longer used in Shibboleth builds.
 
 These are multi-architecture images supporting both both `linux/amd64`
-and `linux/arm64` hosts;the latter is used on Apple Silicon
+and `linux/arm64` hosts; the latter is used on Apple Silicon
 based Macs.
 
 To use these images, you make use of the various `runx` scripts included in this
@@ -276,22 +276,6 @@ either product builds or site builds.
 
 One large issue with the OpenJDK 8 environment is that the Cobertura coverage
 tool does not work there.
-
-## openjdk-\*-debian
-
-These three directories build images from the official Docker library `java`
-images, which are based on OpenJDK and Debian. These can be worth testing against
-because OpenJDK in the Debian environment ships with an alternative elliptic
-curve cryptographic provider.
-
-To build these images:
-
-```bash
-(cd openjdk-7-debian; ./build)
-(cd openjdk-8-debian; ./build)
-```
-
-The tags for these will be `ojdk7-deb` and `ojdk8-deb`.
 
 ## Troubleshooting
 
