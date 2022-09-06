@@ -50,5 +50,5 @@ jobs:
       run: |
         docker buildx build --platform=linux/amd64,linux/arm64 \
           --push \
-          --tag ${{ secrets.DOCKER_USERNAME }}/shibboleth-build-docker:ojdk11-r9 \
+          --tag ${{ secrets.DOCKER_USERNAME }}/shibboleth-build-docker:ojdk17-r9 \
           openjdk-17-rocky-9
