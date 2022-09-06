@@ -5,6 +5,21 @@ A collection of stable environments for use in building and testing
 container image so that it can be embedded within a normal desktop
 environment using [Docker][].
 
+The following table summarises the container images available:
+
+| Tag         | Directory             | Java | OS |  Use Case |
+| ----------- | --------------------- | ---- |-------|
+| `amazon8`   | `amazoncorretto-8`    | Corretto 8  | Amazon Linux | Old Shibboleth builds. |
+| `amazon11`  | `amazoncorretto-11`   | Corretto 11 | Amazon Linux | Shibboleth v4 builds.  |
+| `amazon17`  | `amazoncorretto-17`   | Corretto 17 | Amazon Linux | Shibboleth v5 builds.  |
+| `ojdk7-c7`  | `openjdk-7-centos-7`  | OpenJDK 7   | CentOS 7     | Shibboleth v3 builds.  |
+| `ojdk8-c7`  | `openjdk-8-centos-7`  | OpenJDK 8   | CentOS 7     | |
+| `ojdk11-c7` | `openjdk-11-centos-7` | OpenJDK 11  | CentOS 7     | |
+| `ojdk11-r8` | `openjdk-11-rocky-8`  | OpenJDK 11  | Rocky Linux 8 | |
+| `ojdk17-r8` | `openjdk-17-rocky-8`  | OpenJDK 17  | Rocky Linux 8 | |
+| `ojdk11-r9` | `openjdk-11-rocky-9`  | OpenJDK 11  | Rocky Linux 9 | |
+| `ojdk17-r9` | `openjdk-17-rocky-9`  | OpenJDK 17  | Rocky Linux 9 | Horizon scanning.    |
+
 ## Pre-built Environments
 
 If your use case is the building of Shibboleth products or their Maven sites,
@@ -189,8 +204,8 @@ container's local `.ssh/` directory.
 ## amazoncorretto-17
 
 This is the same as `amazoncorretto-11` but providing Corretto 17 instead of
-Corretto 11. The expectation is that the next generation of Shibboleth Java
-products will be built on this platform.
+Corretto 11. The next generation of Shibboleth Java
+products (specifically, v5 of the Identity Provider) will be built on this platform.
 
 It is also used to perform Maven "site" builds for some projects for the Java
 11 platform. These builds don't currently work under Java 11 distributions.
@@ -256,26 +271,6 @@ session, it will be forwarded into the container so that you can use
 things like `git clone` without further ado. Otherwise, a local `ssh-agent`
 will be started inside the container, to which you can add identities from the
 container's local `.ssh/` directory.
-
-## openjdk-8-centos-7
-
-The `openjdk-8-centos-7` directory builds an image which will be tagged
-as `shibboleth-build-docker:ojdk8-c7`. This is the same as the `ojdk7-c7` tag
-except that OpenJDK 8 is provided instead of OpenJDK 7.
-
-To build the Docker image for this environment, do this:
-
-```bash
-(cd openjdk-8-centos-7; ./build)
-```
-
-Run the environment using `openjdk-8-centos-7/run`.
-
-This image is best used for testing under OpenJDK 8. It should not be used for
-either product builds or site builds.
-
-One large issue with the OpenJDK 8 environment is that the Cobertura coverage
-tool does not work there.
 
 ## Troubleshooting
 

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Tag for the image variant we are using
+TAG=ojdk11-r8
+
+#
+# Docker Desktop for Mac: Mount the magic volume to forward the ssh-agent.
+#
+MAC_OPTIONS=
+if [[ "$OSTYPE" =~ ^darwin ]]; then
+    if [ -n "$SSH_AUTH_SOCK" ]; then
+        MAC_OPTIONS="-v /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock"
+    fi
+fi
+
+docker run -i -t --rm --name shibboleth-build --hostname ${TAG} \
+    --volume=${PWD}/user:/home/user \
+    $MAC_OPTIONS \
+    $@ \
+    shibboleth-build-docker:${TAG}
