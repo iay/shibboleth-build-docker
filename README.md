@@ -9,16 +9,18 @@ The following table summarises the container images available:
 
 | Tag         | Directory             | Java | OS |  Use Case |
 | ----------- | --------------------- | ---- |-------|
-| `amazon8`   | `amazoncorretto-8`    | Corretto 8  | Amazon Linux | Old Shibboleth builds. |
-| `amazon11`  | `amazoncorretto-11`   | Corretto 11 | Amazon Linux | Shibboleth v4 builds.  |
-| `amazon17`  | `amazoncorretto-17`   | Corretto 17 | Amazon Linux | Shibboleth v5 builds.  |
+| `amazon8` \*  | `amazoncorretto-8`    | Corretto 8  | Amazon Linux | Old Shibboleth builds. |
+| `amazon11` \*  | `amazoncorretto-11`   | Corretto 11 | Amazon Linux | Shibboleth v4 builds.  |
+| `amazon17` \* | `amazoncorretto-17`   | Corretto 17 | Amazon Linux | Shibboleth v5 builds.  |
 | `ojdk7-c7`  | `openjdk-7-centos-7`  | OpenJDK 7   | CentOS 7     | Shibboleth v3 builds.  |
 | `ojdk8-c7`  | `openjdk-8-centos-7`  | OpenJDK 8   | CentOS 7     | |
 | `ojdk11-c7` | `openjdk-11-centos-7` | OpenJDK 11  | CentOS 7     | |
 | `ojdk11-r8` | `openjdk-11-rocky-8`  | OpenJDK 11  | Rocky Linux 8 | |
 | `ojdk17-r8` | `openjdk-17-rocky-8`  | OpenJDK 17  | Rocky Linux 8 | |
 | `ojdk11-r9` | `openjdk-11-rocky-9`  | OpenJDK 11  | Rocky Linux 9 | |
-| `ojdk17-r9` | `openjdk-17-rocky-9`  | OpenJDK 17  | Rocky Linux 9 | Horizon scanning.    |
+| `ojdk17-r9` \* | `openjdk-17-rocky-9`  | OpenJDK 17  | Rocky Linux 9 | Horizon scanning.    |
+
+Images marked with a "\*" are available as pre-built environments.
 
 ## Pre-built Environments
 
@@ -29,6 +31,9 @@ sites of Java 11 platform products, or for Java 17 platform products).
 
 I also provide a pre-built environment based on Amazon Corretto 8, although
 this version is no longer used in Shibboleth builds.
+
+A pre-built environment is also available for OpenJDK 17 under Rocky Linux 9 for
+horizon-scanning purposes.
 
 These are multi-architecture images supporting both both `linux/amd64`
 and `linux/arm64` hosts; the latter is used on Apple Silicon
