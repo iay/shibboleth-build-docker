@@ -11,7 +11,7 @@ ARG mavenver=3.8.4
 #
 # Pull in Java, and commonly required tools.
 #
-RUN yum -y install git rpm-build rpm-sign wget which \
+RUN yum -y install git rpm-build rpm-sign wget which sudo \
     ${java} ${java}-devel ${java}-headless && \
     yum clean all
 
@@ -22,6 +22,7 @@ RUN yum -y install git rpm-build rpm-sign wget which \
 # - Bootstrap script.
 # - Default GPG agent configuration.
 # - Bash profile.
+# - sudo rules.
 #
 ADD etc /etc
 

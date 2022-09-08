@@ -407,3 +407,32 @@ or otherwise before exiting.
 [Docker Desktop for Mac]: https://hub.docker.com/editions/community/docker-ce-desktop-mac
 [Shibboleth]: https://shibboleth.net
 [Set up Linux Containers on Windows 10]: https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/quick-start-windows-10-linux
+
+### Doing things as root
+
+The images are careful to build up an environment in which you do everything as a normal user inside the
+container. When you run the image, the container startup sequence includes execution of a bootstrap
+script that tweaks things as required to make this work, before dropping privileges and handing you
+a user prompt.
+
+There will always be cases where you may need to step outside those constraints. Here are a couple
+of ways to do that:
+
+* Build your own container. Simply change the Dockerfile to do what you want it to do, and rebuild.
+* Sneak in the back door. Start the container as normal, and use the following command to
+  get an additional prompt as `root`:
+
+```bash
+$ docker exec -it -u root shibboleth-build sh
+sh-5.1#
+```
+
+Here, using `sh` instead of `bash` bypasses the bootstrap process.
+
+* Use `sudo` inside the container. At the moment, for the various Rocky Linux images only,
+  this is set up to allow the single command `update-crypto-policies` to be executed
+  without providing a password. For example:
+
+```bash
+sudo update-crypto-policies --set FUTURE
+```
