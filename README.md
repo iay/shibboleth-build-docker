@@ -278,16 +278,18 @@ will be started inside the container, to which you can add identities from the
 container's local `.ssh/` directory.
 
 ## Windows
+
 These environments have been successfully used running under Windows.   The initial setup is more complicated owing to the fundamental impedance mismatch between Linux and Windows filesystem implementations.
 
 [Set up Linux Containers on Windows 10][] is a good guide to installing docker on windows clients.    Once set up you need to configure the container.  Currently there are no command files to assist with this.
 
-Running the contain is done by using the same command line inside the relevant `runx` command.  For instance 
-```
+Running the container is done by using the same command line inside the relevant `runx` command.  For instance:
+
+```bash
 docker run -i -t --rm --name  shibboleth-build --hostname amazon11 --volume=%userprofile%\shibboleth-build-docker\user:/home/user ianayoung/shibboleth-build-docker:amazon11
 ```
 
-*Note* that docker will only work on local volumes - do not try to set the volume to be on an SMB volume.
+**Note** that docker will only work on local volumes - do not try to set the volume to be on an SMB volume.
 
 Equally it is safer to only use file which have been created within the docker container. Do not expect things to work if you populate files directly from windows and it is much easier to stage things into the `user` directory and then copy (not move) the files to their final location from inside the container.
 
