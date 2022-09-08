@@ -16,14 +16,14 @@ RUN yum -y install git rpm-build rpm-sign wget which \
     yum clean all
 
 #
-# Default GPG agent configuration.
+# System configuration.
 #
-ADD gpg-agent.conf /etc/gnupg/
-
+# Includes:
+# - Bootstrap script.
+# - Default GPG agent configuration.
+# - Bash profile.
 #
-# Bash profile.
-#
-ADD profile.d/ /etc/profile.d/
+ADD etc /etc
 
 #
 # Install latest version of Maven.
@@ -32,11 +32,6 @@ WORKDIR /opt
 RUN wget --no-verbose  https://archive.apache.org/dist/maven/maven-3/${mavenver}/binaries/apache-maven-${mavenver}-bin.tar.gz && \
     tar xfz apache-maven-${mavenver}-bin.tar.gz && \
     rm *.tar.gz
-
-#
-# Bootstrap script.
-#
-ADD bootstrap.sh /etc/bootstrap.sh
 
 #
 # Do all our work as a normal user, in a home directory.
