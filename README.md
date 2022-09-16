@@ -7,8 +7,9 @@ environment using [Docker][].
 
 The following table summarises the container images available:
 
+
 | Tag         | Directory             | Java | OS |  Use Case |
-| ----------- | --------------------- | ---- |-------|
+| ----------- | --------------------- | ---- | -- | ------- |
 | `amazon8` \*  | `amazoncorretto-8`    | Corretto 8  | Amazon Linux | Old Shibboleth builds. |
 | `amazon11` \*  | `amazoncorretto-11`   | Corretto 11 | Amazon Linux | Shibboleth v4 builds.  |
 | `amazon17` \* | `amazoncorretto-17`   | Corretto 17 | Amazon Linux | Shibboleth v5 builds.  |
@@ -19,6 +20,7 @@ The following table summarises the container images available:
 | `ojdk17-r8` | `openjdk-17-rocky-8`  | OpenJDK 17  | Rocky Linux 8 | |
 | `ojdk11-r9` | `openjdk-11-rocky-9`  | OpenJDK 11  | Rocky Linux 9 | |
 | `ojdk17-r9` \* | `openjdk-17-rocky-9`  | OpenJDK 17  | Rocky Linux 9 | Horizon scanning.    |
+
 
 Images marked with a "\*" are available as pre-built environments.
 
