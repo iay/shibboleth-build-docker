@@ -228,7 +228,7 @@ platform.
 The image is based on the [CentOS][] 7 userspace, with the following tools
 available:
 
-* maven (3.3.9)
+* maven (3.8.8)
 * Subversion
 * Git
 * OpenJDK version 7
