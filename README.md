@@ -175,7 +175,7 @@ production builds of any of the products based on that platform.
 
 The image includes the following tools:
 
-* maven (3.8.6)
+* maven (3.9.1)
 * Git
 * rpmbuild
 * sudo

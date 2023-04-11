@@ -5,7 +5,7 @@ LABEL maintainer="Ian Young <ian@iay.org.uk>"
 #
 # Build arguments and their defaults.
 #
-ARG mavenver=3.8.6
+ARG mavenver=3.9.1
 
 #
 # Pull in commonly required tools.
