@@ -10,7 +10,7 @@ LABEL maintainer="Ian Young <ian@iay.org.uk>"
 # Build arguments and their defaults.
 #
 ARG java=java-1.8.0-openjdk
-ARG mavenver=3.9.1
+ARG mavenver=3.9.5
 
 #
 # Pull in Java, and commonly required tools.
