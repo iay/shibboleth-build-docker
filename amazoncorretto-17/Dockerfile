@@ -17,6 +17,7 @@ RUN yum -y install git rpm-build rpm-sign sudo wget which && \
 # Default GPG agent configuration.
 #
 ADD gpg-agent.conf /etc/gnupg/
+RUN cat /etc/profile.d/bash.sh
 
 #
 # Bash profile.
