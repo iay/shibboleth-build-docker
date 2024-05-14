@@ -49,20 +49,20 @@ jobs:
     - name: Build and push Corretto 8 multi-architecture image
       run: |
         docker buildx build --platform=linux/amd64,linux/arm64 \
-          --push \
+          --no-cache --push \
           --tag ${{ secrets.DOCKER_USERNAME }}/shibboleth-build-docker:amazon8 \
           amazoncorretto-8
 
     - name: Build and push Corretto 11 multi-architecture image
       run: |
         docker buildx build --platform=linux/amd64,linux/arm64 \
-          --push \
+          --no-cache --push \
           --tag ${{ secrets.DOCKER_USERNAME }}/shibboleth-build-docker:amazon11 \
           amazoncorretto-11
 
     - name: Build and push Corretto 17 multi-architecture image
       run: |
         docker buildx build --platform=linux/amd64,linux/arm64 \
-          --push \
+          --no-cache --push \
           --tag ${{ secrets.DOCKER_USERNAME }}/shibboleth-build-docker:amazon17 \
           amazoncorretto-17
