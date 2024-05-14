@@ -3,9 +3,9 @@
 #
 # Every time something is pushed to the "main" branch,
 # build multi-architecture container images based on
-# Amazon Corretto 17. Push these image to Docker Hub.
+# Amazon Corretto 8 and 11. Push these image to Docker Hub.
 #
-name: Build Corretto 17 Images
+name: Build Corretto Images
 
 on:
   push:
@@ -46,9 +46,16 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_TOKEN }}
 
-    - name: Build and push Corretto 17 multi-architecture image
+    - name: Build and push Corretto 8 multi-architecture image
       run: |
         docker buildx build --platform=linux/amd64,linux/arm64 \
-          --push \
-          --tag ${{ secrets.DOCKER_USERNAME }}/shibboleth-build-docker:amazon17 \
-          amazoncorretto-17
+          --no-cache --push \
+          --tag ${{ secrets.DOCKER_USERNAME }}/shibboleth-build-docker:amazon8 \
+          amazoncorretto-8
+
+    - name: Build and push Corretto 11 multi-architecture image
+      run: |
+        docker buildx build --platform=linux/amd64,linux/arm64 \
+          --no-cache --push \
+          --tag ${{ secrets.DOCKER_USERNAME }}/shibboleth-build-docker:amazon11 \
+          amazoncorretto-11
