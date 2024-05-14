@@ -2,8 +2,8 @@
 # Corretto 17 image build workflow.
 #
 # Every time something is pushed to the "main" branch,
-# build multi-architecture container images based on
-# Amazon Corretto 17. Push these image to Docker Hub.
+# build a multi-architecture container image based on
+# Amazon Corretto 17. Push this image to Docker Hub.
 #
 name: Build Corretto 17 Image
 
