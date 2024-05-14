@@ -22,7 +22,6 @@ ADD gpg-agent.conf /etc/gnupg/
 # Bash profile.
 #
 ADD profile.d/ /etc/profile.d/
-RUN cat /etc/profile.d/bash.sh
 
 #
 # Install latest version of Maven.
