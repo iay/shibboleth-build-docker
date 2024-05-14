@@ -25,9 +25,9 @@ Images marked with a "\*" are available as pre-built environments.
 ## Pre-built Environments
 
 If your use case is the building of Shibboleth products or their Maven sites,
-you can use one of the pre-built environments based on Amazon Corretto 11
-(for Java 11 platform products) or Amazon Corretto 17 (for the Maven
-sites of Java 11 platform products, or for Java 17 platform products).
+you can use one of the pre-built environments based on Amazon Corretto 17
+(for Java 17 platform products, or for the Maven sites of Java 11 platform
+products) or Amazon Corretto 11 (for Java 11 platform products).
 
 I also provide a pre-built environment based on Amazon Corretto 8, although
 this version is no longer used in Shibboleth builds.
@@ -57,11 +57,15 @@ sessions using _different_ container variants.
 directories and can be invoked as such:
 
 ```bash
-amazoncorretto-11/runx
+amazoncorretto-17/runx
 ```
 
 In addition, a `runx` alias is provided in the root directory for the most
-common case of invoking the Corretto 11 environment.
+common case of invoking the Corretto 17 environment:
+
+```bash
+./runx
+```
 
 You can pass arguments to a `runx` script and they will be passed on to the
 `docker run` command as Docker options. For example, to run the container
@@ -70,20 +74,21 @@ without network access:
 ```bash
 $ ./runx --network none
 ...
-user@C11: ~ $ curl -I https://iay.org.uk
+user@C17: ~ $ curl -I https://iay.org.uk
 curl: (6) Could not resolve host: iay.org.uk
-user@C11: ~ $
+user@C17: ~ $
 ```
 
-To pull the most up-to-date version of the container image before execution:
+To pull the most up-to-date version of the container image before execution,
+add `--pull always` to the command:
 
 ```bash
 $ ./runx --pull always
-amazon11: Pulling from ianayoung/shibboleth-build-docker
+amazon17: Pulling from ianayoung/shibboleth-build-docker
 ...
-Status: Downloaded newer image for ianayoung/shibboleth-build-docker:amazon11
+Status: Downloaded newer image for ianayoung/shibboleth-build-docker:amazon17
 ...
-user@C11: ~ $
+user@C17: ~ $
 ```
 
 Running the `./copy-dotfiles` script will populate the shared home directory
@@ -137,9 +142,9 @@ You can pass arguments to the `run` script and they will be passed on to the
 ```bash
 $ ./run --network none
 ...
-user@C11: ~ $ curl -I https://iay.org.uk
+user@C17: ~ $ curl -I https://iay.org.uk
 curl: (6) Could not resolve host: iay.org.uk
-user@C11: ~ $
+user@C17: ~ $
 ```
 
 Running the `./copy-dotfiles` script will populate the shared home directory
@@ -162,20 +167,20 @@ with some useful files from your host environment:
   * Other files are _not_ copied, as things like agent configurations and
     agent sockets need to be different inside the container.
 
-## amazoncorretto-11
+## amazoncorretto-17
 
-The `amazoncorretto-11` directory builds what should be regarded as the default
-environment. It is based on the official Docker image for Amazon's Corretto 11
-distribution of OpenJDK 11, which in turn is based on Amazon Linux 2, an
+The `amazoncorretto-17` directory builds what should be regarded as the default
+environment. It is based on the official Docker image for Amazon's Corretto 17
+distribution of OpenJDK 17, which in turn is based on Amazon Linux 2, an
 `rpm`-based distribution related to RHEL 7 and Centos 7.
 
-Corretto 11 is the Java distribution specified as the "primary distribution" for
-the Shibboleth Project's Java 11 platform, and the intention is to allow formal
+Corretto 17 is the Java distribution specified as the "primary distribution" for
+the Shibboleth Project's Java 17 platform, and the intention is to allow formal
 production builds of any of the products based on that platform.
 
 The image includes the following tools:
 
-* maven (3.9.1)
+* maven (3.9.5)
 * Git
 * rpmbuild
 * sudo
@@ -185,12 +190,12 @@ The image includes the following tools:
 To build the Docker image for this environment, do this:
 
 ```bash
-(cd amazoncorretto-11; ./build)
+(cd amazoncorretto-17; ./build)
 ```
 
-The image will be tagged as `shibboleth-build-docker:amazon11`.
+The image will be tagged as `shibboleth-build-docker:amazon17`.
 
-To execute the environment, type `amazoncorretto-11/run`, or just `./run`. This
+To execute the environment, type `amazoncorretto-17/run`, or just `./run`. This
 will give you a `bash` prompt running under the home directory of user `user`
 within a container. This home directory will also exist _outside_ the container
 as a `user/` directory under the build location, and will retain state between
@@ -206,18 +211,15 @@ things like `git clone` without further ado. Otherwise, a local `ssh-agent`
 will be started inside the container, to which you can add identities from the
 container's local `.ssh/` directory.
 
-## amazoncorretto-17
+## amazoncorretto-11
 
-This is the same as `amazoncorretto-11` but providing Corretto 17 instead of
-Corretto 11. The next generation of Shibboleth Java
-products (specifically, v5 of the Identity Provider) will be built on this platform.
+This is the same as `amazoncorretto-17` but providing Corretto 11 instead of
+Corretto 17. The previous generation of Shibboleth Java
+products (specifically, v4 of the Identity Provider) was built on this platform.
 
-It is also used to perform Maven "site" builds for some projects for the Java
-11 platform. These builds don't currently work under Java 11 distributions.
-
-For large projects, you may find that building the site takes a very long time
-inside a container. Refer to the [Performance](#performance) section below for
-an explanation and some tuning suggestions.
+Maven "site" builds for some projects for the Java
+11 platform must be built in an `amazoncorretto-17` container.
+These builds don't currently work under Java 11 distributions.
 
 ## openjdk-7-centos-7
 
@@ -347,7 +349,7 @@ Now, perform the following _inside_ the container:
 gpg --import secret.asc
 ```
 
-### GPG Agent
+### GPG agent
 
 If the location of this repository _on the host_ is too far from the root (if
 the length of the repository's path is too long), you may run into issues
