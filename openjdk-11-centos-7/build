@@ -1,3 +1,0 @@
-#!/bin/bash
-
-docker build $@ -t shibboleth-build-docker:ojdk11-c7 .

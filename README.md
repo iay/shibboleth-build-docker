@@ -12,9 +12,6 @@ The following table summarises the container images available:
 | `amazon8` \*  | `amazoncorretto-8`    | Corretto 8  | Amazon Linux | Old Shibboleth builds. |
 | `amazon11` \*  | `amazoncorretto-11`   | Corretto 11 | Amazon Linux | Shibboleth v4 builds.  |
 | `amazon17` \* | `amazoncorretto-17`   | Corretto 17 | Amazon Linux | Shibboleth v5 builds.  |
-| `ojdk7-c7`  | `openjdk-7-centos-7`  | OpenJDK 7   | CentOS 7     | Shibboleth v3 builds.  |
-| `ojdk8-c7`  | `openjdk-8-centos-7`  | OpenJDK 8   | CentOS 7     | |
-| `ojdk11-c7` | `openjdk-11-centos-7` | OpenJDK 11  | CentOS 7     | |
 | `ojdk11-r8` | `openjdk-11-rocky-8`  | OpenJDK 11  | Rocky Linux 8 | |
 | `ojdk17-r8` | `openjdk-17-rocky-8`  | OpenJDK 17  | Rocky Linux 8 | |
 | `ojdk11-r9` | `openjdk-11-rocky-9`  | OpenJDK 11  | Rocky Linux 9 | |
@@ -114,6 +111,7 @@ with some useful files from your host environment:
 ## Build Your Own Environments
 
 If you are unable to use the pre-built environments for whatever reason,
+or just want to use the most recent base images,
 you will need to perform a local build of the container image or images
 you want to use. Note that images built in this way will be specific to
 your Docker host's architecture.
@@ -221,64 +219,6 @@ Maven "site" builds for some projects for the Java
 11 platform must be built in an `amazoncorretto-17` container.
 These builds don't currently work under Java 11 distributions.
 
-## openjdk-7-centos-7
-
-The `openjdk-7-centos-7` directory builds an environment intended to allow
-formal production builds of products based on the Shibboleth Project's Java 7
-platform.
-
-The image is based on the [CentOS][] 7 userspace, with the following tools
-available:
-
-* maven (3.8.8)
-* Subversion
-* Git
-* OpenJDK version 7
-* rpmbuild
-* wget
-* which
-
-The OpenJDK provided here is not quite the Java distribution specified as the
-"primary distribution" for the Shibboleth Project's Java 7 platform; that's
-Oracle's distribution.
-
-The intention nevertheless is to allow close to formal
-production builds of any of the products based on that platform.
-
-To build the Docker image for this environment, do this:
-
-```bash
-(cd openjdk-7-centos-7; ./build)
-```
-
-The image will be tagged as `shibboleth-build-docker:ojdk7-c7`.
-
-To execute the environment, type `openjdk-7-centos-7/run`. This will give you a `bash` prompt
-running under the home directory of user `user` within a container. This home
-directory will also exist _outside_ the container as a `user/` directory under
-the build location, and will retain state between runs. Terminate the
-container and return to your original environment using Ctrl+D.
-
-If you want to start fresh, just exit the environment and then remove the
-`user/` directory. It will be recreated on the next run.
-
-If you have customisations in your outer environment, execute `./copy-dotfiles`
-to copy them into the user directory. At the moment this handles:
-
-* `~/.m2/settings.xml`
-* `~/.gitconfig`
-* `~/.ssh`
-
-Copying `~/.ssh` is mostly intended to allow the use of `git` to a remote
-repository, but note that you will need to type the passphrase each time as
-no `ssh` agent is set up. This is not intended to be a development environment.
-
-If you're running on macOS, and there's an `ssh-agent` running in the host
-session, it will be forwarded into the container so that you can use
-things like `git clone` without further ado. Otherwise, a local `ssh-agent`
-will be started inside the container, to which you can add identities from the
-container's local `.ssh/` directory.
-
 ## Windows
 
 These environments have been successfully used running under Windows.   The initial setup is more complicated owing to the fundamental impedance mismatch between Linux and Windows filesystem implementations.
@@ -327,7 +267,7 @@ The version of GPG used in most of the image variants built here is quite old,
 because the containers use the version of GPG that is current for the underlying
 operating system. In most cases, this is something like version 2.0.
 
-Outside the container, you may well be using something from the 2.2 series: this
+Outside the container, you may well be using something from the 2.2 series or later: this
 uses a new keychain format which is not supported by version 2.0. If you have
 used GPG for a long time, you will have in your host's `~/.gnupg` both the old
 format files (`secring.gpg` and `pubring.gpg`) and the new format ones. In this
@@ -404,7 +344,6 @@ persist if you exit the shell and thus terminate the container; you should
 ensure that the results of your operation are preserved either in `/home/user`
 or otherwise before exiting.
 
-[CentOS]: https://www.centos.org
 [Docker]: https://www.docker.com
 [Docker Desktop for Mac]: https://hub.docker.com/editions/community/docker-ce-desktop-mac
 [Shibboleth]: https://shibboleth.net
