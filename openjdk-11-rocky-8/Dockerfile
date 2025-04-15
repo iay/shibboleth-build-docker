@@ -11,7 +11,7 @@ ARG mavenver=3.9.5
 #
 # Pull in Java, and commonly required tools.
 #
-RUN yum -y install git rpm-build rpm-sign wget which sudo \
+RUN yum -y install git procps-ng rpm-build rpm-sign wget which sudo \
     ${java} ${java}-devel ${java}-headless && \
     yum clean all
 

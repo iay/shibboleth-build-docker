@@ -10,7 +10,7 @@ ARG mavenver=3.9.5
 #
 # Pull in commonly required tools.
 #
-RUN yum -y install git rpm-build rpm-sign sudo wget which && \
+RUN yum -y install git procps-ng rpm-build rpm-sign sudo wget which && \
     yum clean all
 
 #
