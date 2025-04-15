@@ -14,6 +14,9 @@ mkdir -p user/.m2
 if [ -e ~/.m2/settings.xml ]; then
   cp -f ~/.m2/settings.xml user/.m2/
 fi
+if [ -e ~/.m2/settings-security.xml ]; then
+  cp -f ~/.m2/settings-security.xml user/.m2/
+fi
 
 #
 # Git configuration.
