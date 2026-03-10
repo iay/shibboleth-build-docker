@@ -30,6 +30,18 @@ fi
 #
 if [ -d ~/.ssh ]; then
   cp -f -r ~/.ssh user/
+
+  #
+  # Comment out some problematic SSH configuration
+  # directives. These are not supported by the version
+  # of SSH currently used inside the container.
+  #
+  SSH_CONFIG=user/.ssh/config
+  if [ -f ${SSH_CONFIG} ]; then
+    sed -i.bak 's/^[^#]*StrictHostKeyChecking.*/#&/g' ${SSH_CONFIG}
+    sed -i.bak 's/^[^#]*WarnWeakCrypto.*/#&/g' ${SSH_CONFIG}
+    # diff ~/.ssh/config ${SSH_CONFIG}
+  fi
 fi
 
 #
