@@ -1,4 +1,4 @@
-FROM amazoncorretto:11
+FROM amazoncorretto:11-al2
 
 LABEL maintainer="Ian Young <ian@iay.org.uk>"
 
