@@ -18,6 +18,11 @@ fi
 chown user:user $(tty)
 
 #
+# Fix ownership of the release volume mountpoint
+#
+chown user:user /home/user/release
+
+#
 # Become the user, and "log in".
 #
 su - user

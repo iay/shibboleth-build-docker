@@ -10,8 +10,16 @@ ARG mavenver=3.9.5
 #
 # Pull in commonly required tools.
 #
-RUN yum -y install git procps-ng rpm-build rpm-sign sudo wget which && \
+RUN yum -y install git procps-ng rpm-build rpm-sign sudo wget which vim-enhanced && \
     yum clean all
+
+#
+# Pull in Python 3 and modules for automated build process.
+#
+RUN yum -y install python3 && yum clean all
+ADD python3-requirements.txt /tmp/requirements.txt
+RUN pip3 install -r /tmp/requirements.txt
+RUN rm /tmp/requirements.txt
 
 #
 # Default GPG agent configuration.
