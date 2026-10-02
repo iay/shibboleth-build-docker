@@ -9,7 +9,6 @@ The following table summarises the container images available:
 
 | Tag | Directory | Java | OS | Use Case |
 | ----------- | --------------------- | ---- | -- | ------- |
-| `amazon8` \* | `amazoncorretto-8` | Corretto 8 | Amazon Linux 2 | Old Shibboleth builds. |
 | `amazon11` \* | `amazoncorretto-11` | Corretto 11 | Amazon Linux 2 | Shibboleth v4 builds. |
 | `amazon17` \* | `amazoncorretto-17` | Corretto 17 | Amazon Linux 2 | Shibboleth v5 builds. |
 | `ojdk11-r8` | `openjdk-11-rocky-8` | OpenJDK 11 | Rocky Linux 8 | |
@@ -25,9 +24,6 @@ If your use case is the building of Shibboleth products or their Maven sites,
 you can use one of the pre-built environments based on Amazon Corretto 17
 (for Java 17 platform products, or for the Maven sites of Java 11 platform
 products) or Amazon Corretto 11 (for Java 11 platform products).
-
-I also provide a pre-built environment based on Amazon Corretto 8, although
-this version is no longer used in Shibboleth builds.
 
 A pre-built environment is also available for OpenJDK 17 under Rocky Linux 9 for
 horizon-scanning purposes.
@@ -50,7 +46,7 @@ It is normal to invoke the `runx` scripts from the root directory of this
 repository; this means that the home directory will persist even across
 sessions using _different_ container variants.
 
-`runx` scripts exist in the `amazoncorretto-8`, `amazoncorretto-11` and `amazoncorretto-17`
+`runx` scripts exist in the `amazoncorretto-11` and `amazoncorretto-17`
 directories and can be invoked as such:
 
 ```bash
