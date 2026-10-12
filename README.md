@@ -174,12 +174,16 @@ production builds of any of the products based on that platform.
 
 The image includes the following tools:
 
-* maven (3.9.5)
+* Maven
 * Git
 * rpmbuild
 * sudo
 * wget
 * which
+
+The version of Maven included is determined by the `MAVEN_VERSION` set
+in the `VERSIONS` file. This is normally set to the version currently
+in use by the Shibboleth project's continuous integration systems.
 
 To build the Docker image for this environment, do this:
 

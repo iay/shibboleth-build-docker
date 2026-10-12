@@ -6,7 +6,7 @@ LABEL maintainer="Ian Young <ian@iay.org.uk>"
 # Build arguments and their defaults.
 #
 ARG java=java-17-openjdk
-ARG mavenver=3.9.5
+ARG MAVEN_VERSION
 
 #
 # Pull in Java, and commonly required tools.
@@ -30,8 +30,8 @@ ADD etc /etc
 # Install latest version of Maven.
 #
 WORKDIR /opt
-RUN wget --no-verbose  https://archive.apache.org/dist/maven/maven-3/${mavenver}/binaries/apache-maven-${mavenver}-bin.tar.gz && \
-    tar xfz apache-maven-${mavenver}-bin.tar.gz && \
+RUN wget --no-verbose  https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
+    tar xfz apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
     rm *.tar.gz
 
 #

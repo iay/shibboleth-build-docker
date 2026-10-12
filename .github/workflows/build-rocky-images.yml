@@ -48,7 +48,9 @@ jobs:
 
     - name: Build and push Rocky 9 Java 17 multi-architecture image
       run: |
+        . VERSIONS
         docker buildx build --platform=linux/amd64,linux/arm64 \
+          --build-arg MAVEN_VERSION=${MAVEN_VERSION} \
           --push \
           --tag ${{ secrets.DOCKER_USERNAME }}/shibboleth-build-docker:ojdk17-r9 \
           openjdk-17-rocky-9

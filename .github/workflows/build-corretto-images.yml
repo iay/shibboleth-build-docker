@@ -1,9 +1,9 @@
 #
-# Corretto 8 and 11 image build workflow.
+# Corretto 11 image build workflow.
 #
 # Every time something is pushed to the "main" branch,
-# build multi-architecture container images based on
-# Amazon Corretto 8 and 11. Push these images to Docker Hub.
+# build a multi-architecture container image based on
+# Amazon Corretto 11. Push this image to Docker Hub.
 #
 name: Build Corretto Images
 
@@ -48,7 +48,9 @@ jobs:
 
     - name: Build and push Corretto 11 multi-architecture image
       run: |
+        . VERSIONS
         docker buildx build --platform=linux/amd64,linux/arm64 \
+          --build-arg MAVEN_VERSION=${MAVEN_VERSION} \
           --no-cache --push \
           --tag ${{ secrets.DOCKER_USERNAME }}/shibboleth-build-docker:amazon11 \
           amazoncorretto-11

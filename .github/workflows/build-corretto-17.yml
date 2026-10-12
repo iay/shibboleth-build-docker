@@ -48,7 +48,9 @@ jobs:
 
     - name: Build and push Corretto 17 multi-architecture image
       run: |
+        . VERSIONS
         docker buildx build --platform=linux/amd64,linux/arm64 \
+          --build-arg MAVEN_VERSION=${MAVEN_VERSION} \
           --no-cache --push \
           --tag ${{ secrets.DOCKER_USERNAME }}/shibboleth-build-docker:amazon17 \
           amazoncorretto-17

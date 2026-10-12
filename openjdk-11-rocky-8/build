@@ -1,3 +1,15 @@
 #!/bin/bash
 
-docker build $@ -t shibboleth-build-docker:ojdk11-r8 .
+#
+# Fail on any errors.
+#
+set -e
+
+#
+# Pick up global versions.
+#
+. ../VERSIONS
+
+docker build $@ -t shibboleth-build-docker:ojdk11-r8 \
+    --build-arg MAVEN_VERSION=${MAVEN_VERSION} \
+    .

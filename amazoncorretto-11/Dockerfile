@@ -3,9 +3,9 @@ FROM amazoncorretto:11-al2
 LABEL maintainer="Ian Young <ian@iay.org.uk>"
 
 #
-# Build arguments and their defaults.
+# Build arguments.
 #
-ARG mavenver=3.9.5
+ARG MAVEN_VERSION
 
 #
 # Pull in commonly required tools.
@@ -27,8 +27,8 @@ ADD profile.d/ /etc/profile.d/
 # Install latest version of Maven.
 #
 WORKDIR /opt
-RUN wget --no-verbose https://archive.apache.org/dist/maven/maven-3/${mavenver}/binaries/apache-maven-${mavenver}-bin.tar.gz && \
-    tar xfz apache-maven-${mavenver}-bin.tar.gz && \
+RUN wget --no-verbose https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
+    tar xfz apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
     rm *.tar.gz
 
 #
