@@ -2,4 +2,4 @@
 # Sourced by each build to pass component version
 # strings through to individual Dockerfiles.
 #
-MAVEN_VERSION=3.9.5
+MAVEN_VERSION=3.9.16
