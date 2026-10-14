@@ -112,7 +112,7 @@ you will need to perform a local build of the container image or images
 you want to use. Note that images built in this way will be specific to
 your Docker host's architecture.
 
-Each directory in the repository represents a different build environment.
+Each directory in the repository (other than `maven`) represents a different build environment.
 Each directory contains a `build` script to build the container image, and a
 `run` script to start a new container based on that image and providing a shell
 running within it.
@@ -124,6 +124,13 @@ against the latest base image rather than whatever is cached locally.
 If you want to build _all_ of the variants at once, you can use the `build-all`
 script in the top directory. If you pass arguments to this script they will
 be forwarded to each variant's `build` script in turn.
+
+Note that building any of the container images locally will cause a
+data container image called `shibboleth-build-docker:maven-XXX` to be
+built as well, where `XXX` represents a Maven version number.
+This is built to download and validate the version
+of Maven to be used in the main builds. This will only happen
+once for each version of Maven.
 
 The `run` script mounts the `user` directory from the repository as `/home/user`
 within the container; from the container's prompt, this appears as the user's

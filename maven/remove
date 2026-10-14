@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#
+# Remove the data container for the given Maven version,
+# so that the next invocation of "fetch" will rebuild it.
+#
+
+#
+# Fail on any errors.
+#
+set -e
+
+#
+# Pick up global versions.
+#
+. ../VERSIONS
+
+docker image remove ${MAVEN_IMAGE} >/dev/null 2>&1

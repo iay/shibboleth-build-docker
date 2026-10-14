@@ -3,3 +3,11 @@
 # strings through to individual Dockerfiles.
 #
 MAVEN_VERSION=3.9.16
+ALPINE_VERSION=3.24
+
+#
+# Derived values.
+#
+
+# Data container containing Maven.
+MAVEN_IMAGE=shibboleth-build-docker:maven-${MAVEN_VERSION}

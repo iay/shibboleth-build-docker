@@ -1,11 +1,20 @@
+# check=skip=InvalidDefaultArgInFrom
+
+#
+# This build stage simply references the pre-built Maven data container.
+# This will fail at build time if the appropriate build argument is not
+# passed, so the check for a default is not appropriate and is
+# therefore skipped above.
+#
+ARG MAVEN_IMAGE
+FROM ${MAVEN_IMAGE} AS maven
+
+#
+# Main container build stage.
+#
 FROM amazoncorretto:11-al2
 
 LABEL maintainer="Ian Young <ian@iay.org.uk>"
-
-#
-# Build arguments.
-#
-ARG MAVEN_VERSION
 
 #
 # Pull in commonly required tools.
@@ -24,12 +33,10 @@ ADD gpg-agent.conf /etc/gnupg/
 ADD profile.d/ /etc/profile.d/
 
 #
-# Install latest version of Maven.
+# Install selected version of Maven.
 #
 WORKDIR /opt
-RUN wget --no-verbose https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
-    tar xfz apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
-    rm *.tar.gz
+COPY --from=maven /opt/apache-maven apache-maven
 
 #
 # Bootstrap script.

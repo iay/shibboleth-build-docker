@@ -10,6 +10,10 @@ set -e
 #
 . ../VERSIONS
 
+# Ensure availability of correct Maven version.
+(cd ../maven; ./fetch $@)
+
 docker build $@ -t shibboleth-build-docker:ojdk17-r8 \
+    --build-arg MAVEN_IMAGE=${MAVEN_IMAGE} \
     --build-arg MAVEN_VERSION=${MAVEN_VERSION} \
     .

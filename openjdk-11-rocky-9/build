@@ -11,5 +11,6 @@ set -e
 . ../VERSIONS
 
 docker build $@ -t shibboleth-build-docker:ojdk11-r9 \
+    --build-arg MAVEN_IMAGE=${MAVEN_IMAGE} \
     --build-arg MAVEN_VERSION=${MAVEN_VERSION} \
     .

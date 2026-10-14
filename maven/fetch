@@ -1,0 +1,28 @@
+#!/bin/bash
+
+#
+# Fail on any errors.
+#
+set -e
+
+#
+# Pick up global versions.
+#
+. ../VERSIONS
+
+#
+# Optimisation: do not rebuild the data container image
+# if it already exists locally.
+#
+# Short-circuit this using the "remove" script.
+#
+if docker image inspect ${MAVEN_IMAGE} >/dev/null 2>&1; then
+    # Image exists locally
+    exit 0
+fi
+
+docker buildx build $@ -t ${MAVEN_IMAGE} \
+    --build-arg MAVEN_VERSION=${MAVEN_VERSION} \
+    --build-arg ALPINE_VERSION=${ALPINE_VERSION} \
+    --debug \
+    .
