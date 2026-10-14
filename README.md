@@ -168,6 +168,21 @@ with some useful files from your host environment:
   * Other files are _not_ copied, as things like agent configurations and
     agent sockets need to be different inside the container.
 
+## Releasing the pre-built environments
+
+The `./build-release-all` script will cause all of the pre-built environments
+to be generated and pushed to the `ianayoung` user on Docker Hub.
+
+This obviously requires access to that user's credentials, and is not
+intended for general use. Other assumptions include:
+
+* Docker Desktop for Mac running on an Apple Silicon Mac
+* Settings > General > Use containerd for pulling and storing images: enabled
+
+The Maven data container image is only built for the host's native platform.
+If adding new pre-built images, this means that the `FROM ... AS maven` lines
+in the new `Dockerfile` must include an explicit `--platform=$BUILDPLATFORM`.
+
 ## amazoncorretto-17
 
 The `amazoncorretto-17` directory builds what should be regarded as the default

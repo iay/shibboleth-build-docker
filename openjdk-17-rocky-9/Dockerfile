@@ -7,7 +7,7 @@
 # therefore skipped above.
 #
 ARG MAVEN_IMAGE
-FROM ${MAVEN_IMAGE} AS maven
+FROM --platform=$BUILDPLATFORM ${MAVEN_IMAGE} AS maven
 
 #
 # Main container build stage.
