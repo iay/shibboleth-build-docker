@@ -10,6 +10,8 @@ The following table summarises the container images available:
 | Tag | Directory | Java | OS | Use Case |
 | ----------- | --------------------- | ---- | -- | ------- |
 | `amazon17` \* | `amazoncorretto-17` | Corretto 17 | Amazon Linux 2 | Shibboleth v5 builds. |
+| `amazon21` | `amazoncorretto-21` | Corretto 21 | Amazon Linux 2 | Horizon scanning. |
+| `amazon25` | `amazoncorretto-25` | Corretto 25 | Amazon Linux 2023 | Horizon scanning. |
 | `ojdk17-r8` | `openjdk-17-rocky-8` | OpenJDK 17 | Rocky Linux 8 | |
 | `ojdk17-r9` \* | `openjdk-17-rocky-9` | OpenJDK 17 | Rocky Linux 9 | Horizon scanning. |
 
