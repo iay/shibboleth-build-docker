@@ -9,21 +9,16 @@ The following table summarises the container images available:
 
 | Tag | Directory | Java | OS | Use Case |
 | ----------- | --------------------- | ---- | -- | ------- |
-| `amazon11` \* | `amazoncorretto-11` | Corretto 11 | Amazon Linux 2 | Shibboleth v4 builds. |
 | `amazon17` \* | `amazoncorretto-17` | Corretto 17 | Amazon Linux 2 | Shibboleth v5 builds. |
-| `ojdk11-r8` | `openjdk-11-rocky-8` | OpenJDK 11 | Rocky Linux 8 | |
 | `ojdk17-r8` | `openjdk-17-rocky-8` | OpenJDK 17 | Rocky Linux 8 | |
-| `ojdk11-r9` | `openjdk-11-rocky-9` | OpenJDK 11 | Rocky Linux 9 | |
 | `ojdk17-r9` \* | `openjdk-17-rocky-9` | OpenJDK 17 | Rocky Linux 9 | Horizon scanning. |
 
 Images marked with a "\*" are available as pre-built environments.
 
 ## Pre-built Environments
 
-If your use case is the building of Shibboleth products or their Maven sites,
-you can use one of the pre-built environments based on Amazon Corretto 17
-(for Java 17 platform products, or for the Maven sites of Java 11 platform
-products) or Amazon Corretto 11 (for Java 11 platform products).
+If your use case is the building of Shibboleth products based in the Java 17 platform,
+you can use one of the pre-built environments based on Amazon Corretto 17.
 
 A pre-built environment is also available for OpenJDK 17 under Rocky Linux 9 for
 horizon-scanning purposes.
@@ -46,7 +41,7 @@ It is normal to invoke the `runx` scripts from the root directory of this
 repository; this means that the home directory will persist even across
 sessions using _different_ container variants.
 
-`runx` scripts exist in the `amazoncorretto-11` and `amazoncorretto-17`
+`runx` scripts exist in the `amazoncorretto-11` and `openjdk-17-rocky-9`
 directories and can be invoked as such:
 
 ```bash
@@ -230,16 +225,6 @@ session, it will be forwarded into the container so that you can use
 things like `git clone` without further ado. Otherwise, a local `ssh-agent`
 will be started inside the container, to which you can add identities from the
 container's local `.ssh/` directory.
-
-## amazoncorretto-11
-
-This is the same as `amazoncorretto-17` but providing Corretto 11 instead of
-Corretto 17. The previous generation of Shibboleth Java
-products (specifically, v4 of the Identity Provider) was built on this platform.
-
-Maven "site" builds for some projects for the Java
-11 platform must be built in an `amazoncorretto-17` container.
-These builds don't currently work under Java 11 distributions.
 
 ## Windows
 
