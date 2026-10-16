@@ -1,2 +1,0 @@
-# sudo rules for the user
-user ALL=(ALL) NOPASSWD: /usr/bin/update-crypto-policies

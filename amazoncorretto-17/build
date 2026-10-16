@@ -13,7 +13,8 @@ set -e
 # Ensure availability of correct Maven version.
 (cd ../maven; ./fetch $@)
 
-docker build $@ -t shibboleth-build-docker:amazon17 \
+docker buildx build $@ -t shibboleth-build-docker:amazon17 \
     --build-arg MAVEN_IMAGE=${MAVEN_IMAGE} \
     --build-arg MAVEN_VERSION=${MAVEN_VERSION} \
+    --build-context common=../contexts/common \
     .

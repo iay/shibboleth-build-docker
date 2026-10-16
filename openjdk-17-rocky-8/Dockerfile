@@ -37,7 +37,9 @@ RUN yum -y install git procps-ng rpm-build rpm-sign wget which sudo \
 # - Bash profile.
 # - sudo rules.
 #
-ADD etc /etc
+COPY --from=common etc /etc
+COPY --from=el etc /etc
+COPY etc /etc
 
 #
 # Install selected version of Maven.

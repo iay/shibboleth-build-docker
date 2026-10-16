@@ -20,6 +20,8 @@ docker buildx build $@ \
     --platform=linux/amd64,linux/arm64 \
     --build-arg MAVEN_IMAGE=${MAVEN_IMAGE} \
     --build-arg MAVEN_VERSION=${MAVEN_VERSION} \
+    --build-context common=../contexts/common \
+    --build-context el=../contexts/el \
     --push \
     --tag ianayoung/shibboleth-build-docker:${TAG} \
     .

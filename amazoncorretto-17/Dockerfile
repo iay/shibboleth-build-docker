@@ -23,25 +23,21 @@ RUN yum -y install git procps-ng rpm-build rpm-sign sudo wget which && \
     yum clean all
 
 #
-# Default GPG agent configuration.
+# System configuration.
 #
-ADD gpg-agent.conf /etc/gnupg/
-
+# Includes:
+# - Bootstrap script.
+# - Default GPG agent configuration.
+# - Bash profile.
 #
-# Bash profile.
-#
-ADD profile.d/ /etc/profile.d/
+COPY --from=common etc /etc
+COPY etc /etc
 
 #
 # Install selected version of Maven.
 #
 WORKDIR /opt
 COPY --from=maven /opt/apache-maven apache-maven
-
-#
-# Bootstrap script.
-#
-ADD bootstrap.sh /etc/bootstrap.sh
 
 #
 # Do all our work as a normal user, in a home directory.
